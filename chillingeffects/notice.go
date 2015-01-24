@@ -12,8 +12,8 @@ type Notice struct {
 	Type           string    `bson:"type,omitempty" json:"type"`
 	Title          string    `bson:"title,omitempty" json:"title"`
 	Body           string    `bson:"body,omitempty" json:"body"`
-	DataSent       time.Time `bson:"data_send,omitempty" json:"data_send"`
-	DataReceived   time.Time `bson:"data_received,omitempty" json:"data_received"`
+	DateSent       time.Time `bson:"date_send,omitempty" json:"date_send"`
+	DateReceived   time.Time `bson:"date_received,omitempty" json:"date_received"`
 	Topics         []string  `bson:"topics,omitempty" json:"topics"`
 	Tags           []string  `bson:"tags,omitempty" json:"tags"`
 	Jurisdiction   []string  `bson:"jurisdiction,omitempty" json:"jurisdiction"`
