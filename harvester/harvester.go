@@ -7,6 +7,7 @@ import (
 	log "github.com/Sirupsen/logrus"
 	"github.com/codegangsta/cli"
 	"github.com/gophergala/heatingeffect/chillingeffects"
+	"github.com/gophergala/heatingeffect/common"
 	mgo "gopkg.in/mgo.v2"
 )
 
@@ -56,7 +57,7 @@ func main() {
 
 		// Get config
 		log.Infof("Loading config file \"%s\".", payloadFileName)
-		config, err := LoadConfig(payloadFileName)
+		config, err := common.LoadConfig(payloadFileName)
 		if err != nil {
 			log.Error(err)
 			return
@@ -88,7 +89,7 @@ func main() {
 	app.Run(os.Args)
 }
 
-func harvestNotices(config *Config, session *mgo.Session) {
+func harvestNotices(config *common.Config, session *mgo.Session) {
 	reports := make(chan *report)
 	for i := config.IDRange.Low; i <= config.IDRange.High; i++ {
 		go harvestNotice(i, config, session, reports)
@@ -102,7 +103,7 @@ func harvestNotices(config *Config, session *mgo.Session) {
 	}
 }
 
-func harvestNotice(id int, config *Config, session *mgo.Session, reports chan<- *report) {
+func harvestNotice(id int, config *common.Config, session *mgo.Session, reports chan<- *report) {
 	notice, err := chillingeffects.RequestNotice(id)
 	if err != nil {
 		reports <- &report{
@@ -125,7 +126,7 @@ type report struct {
 	err error
 }
 
-func initMongoDB(config *Config) (*mgo.Session, error) {
+func initMongoDB(config *common.Config) (*mgo.Session, error) {
 	if config.MongoDB == nil {
 		return nil, fmt.Errorf("Config.MongoDB is nil")
 	}
