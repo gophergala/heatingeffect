@@ -64,15 +64,6 @@ func RequestNotice(id int) (*Notice, error) {
 	for k, v := range value {
 		v.Type = k
 		notice = v
-		// DEBUG
-		switch k {
-		case "dmca":
-		case "defamation":
-		case "trademark":
-			break
-		default:
-			fmt.Printf("New notice type %s. Notice ID: %d\n", k, v.ID)
-		}
 	}
 	return notice, nil
 }
