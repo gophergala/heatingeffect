@@ -158,7 +158,7 @@ func queueTasks(config *common.Config, latestHarvestedID, latestID int) error {
 }
 
 func getLatestHarvestedID(config *common.Config, session *mgo.Session) (int, error) {
-	c := session.DB(config.MongoDB.Database).C(config.MongoDB.NoticeCollectionName)
+	c := session.DB(config.MongoDB.Database).C(config.MongoDB.NoticesCollectionName)
 	query := c.Find(bson.M{}).Sort("-_id").Limit(1)
 	var notice chillingeffects.Notice
 	err := query.One(&notice)

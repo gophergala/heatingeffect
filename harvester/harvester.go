@@ -113,7 +113,7 @@ func harvestNotice(id int, config *common.Config, session *mgo.Session, reports 
 		return
 	}
 
-	c := session.DB(config.MongoDB.Database).C(config.MongoDB.NoticeCollectionName)
+	c := session.DB(config.MongoDB.Database).C(config.MongoDB.NoticesCollectionName)
 	err = c.Insert(notice)
 	reports <- &report{
 		id:  id,

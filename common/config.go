@@ -27,7 +27,9 @@ type MgoDialInfo struct {
 	Password string `json:"password"`
 
 	// collection name for chillingeffects.Notices
-	NoticeCollectionName string `json:"notice_collection_name"`
+	NoticesCollectionName string `json:"notices_collection_name"`
+
+	NoticesSendToStatCollectionName string `json:"notices_sendto_stat_collection_name"`
 }
 
 type Config struct {
