@@ -45,6 +45,9 @@ func RequestNotice(id int) (*Notice, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("StatusCode: %s", resp.Status)
+	}
 
 	dec := json.NewDecoder(resp.Body)
 	value := make(map[string]*Notice)
